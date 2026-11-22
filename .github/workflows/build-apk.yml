@@ -15,6 +15,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Validate bundled JavaScript
+        run: |
+          python3 - <<'PY'
+          import re
+          p='app/src/main/assets/index.html'
+          h=open(p,encoding='utf-8').read()
+          scripts=re.findall(r'<script>(.*?)</script>',h,re.S)
+          assert scripts, 'No application script found'
+          open('/tmp/iirw-app.js','w',encoding='utf-8').write('\n'.join(scripts))
+          print('Extracted',len(scripts),'script block(s)')
+          PY
+          node --check /tmp/iirw-app.js
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
