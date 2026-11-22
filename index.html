@@ -76,4 +76,4 @@ $("exportWorld").onclick=()=>download("IIRW-world-day-"+s.day+".json",{format:"I
 $("importWorld").onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const d=JSON.parse(await f.text());const z=d.state||d;if(!Array.isArray(z.projects)||!Array.isArray(z.logs))throw Error("档案结构不正确");stop();s={...initial(),...z,schema:"IIRW-1.0"};trained=d.trainedModel||null;save();render();alert("世界档案导入成功")}catch(err){alert("导入失败："+err.message)}e.target.value=""};
 render();
 })();
-</script></body></html>
+</script><script src="./research-engine.js"></script></body></html>
