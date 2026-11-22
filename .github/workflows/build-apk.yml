@@ -27,6 +27,7 @@ jobs:
           print('Extracted',len(scripts),'script block(s)')
           PY
           node --check /tmp/iirw-app.js
+          node --check research-engine.js
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
